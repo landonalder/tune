@@ -1,3 +1,5 @@
+const {VictoryLine} = Victory;
+
 // Idea for this taken from this stackoverflow post:
 // http://stackoverflow.com/questions/14467433/currency-formatting-in-javascript
 function formatNumberStringAsCurrency(numberString) {
@@ -47,8 +49,11 @@ var UserStatsBox = React.createClass({
         <div className="cardContainer">
           <UserIdentification avatar={ this.props.user.avatar } name={ this.props.user["name"] }
                               occupation={ this.props.user.occupation } />
-          <NamedStatistic statNumber={ this.props.user.impressionCount } statName="impressions" statType="impressions" />
-          <NamedStatistic statNumber={ this.props.user.conversionCount } statName="conversions" statType="conversions" />
+          <ConversionsChart conversionsByDay={ this.props.user.conversionsByDay } />
+          <div id="right">
+            <NamedStatistic statNumber={ this.props.user.impressionCount } statName="impressions" statType="impressions" />
+            <NamedStatistic statNumber={ this.props.user.conversionCount } statName="conversions" statType="conversions" />
+          </div>
           <h2 className="stats revenue">{ formatNumberStringAsCurrency(this.props.user.revenue || "") }</h2>
         </div>
       </div>
@@ -56,13 +61,29 @@ var UserStatsBox = React.createClass({
   }
 });
 
+var ConversionsChart = React.createClass({
+  render: function() {
+    return (
+      <div id="left">
+          <VictoryLine
+            data={ this.props.conversionsByDay }
+            x={ "date" }
+            y={ "conversions" }
+            height={ 80 }
+            width= { 300 }
+          />
+      </div>
+    );
+  }
+})
+
 var UserIdentification = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="userIdentification">
         <UserPhoto photoUrl={ this.props.avatar } userName={ this.props["name"] }/>
         <h1>{ this.props["name"] }</h1>
-        <h3>{ this.props.occupation }</h3>
+        <h3 className="occupation">{ this.props.occupation }</h3>
       </div>
     );
   }

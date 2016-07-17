@@ -1,4 +1,5 @@
 require 'json'
+require 'Date'
 
 def mergeFiles(usersFilePath, activityLogPath)
   usersFile = File.read(usersFilePath)
@@ -11,22 +12,39 @@ def mergeFiles(usersFilePath, activityLogPath)
     impressionCount = 0
     conversionCount = 0
     revenue = 0
-    activities.each do |activity|
-      if activity["user_id"] == user["id"]
-        if activity["type"] == "conversion"
-          conversionCount += 1
-          revenue += Integer(activity["revenue"])
-        end
+    conversionsByDay = {}
 
-        if activity["type"] == "impression"
-          impressionCount+= 1
+    activities.each do |activity|
+      if activity["user_id"] != user["id"]
+        next
+      end
+        
+      if activity["type"] == "conversion"
+        conversionCount += 1
+        revenue += Integer(activity["revenue"])
+        date = DateTime.parse(activity["time"]).strftime('%m/%d')
+
+
+        if !conversionsByDay[date]
+          conversionsByDay[date] = 1
+        else
+          conversionsByDay[date] += 1
         end
       end
+
+      if activity["type"] == "impression"
+        impressionCount+= 1
+      end
+    end
+
+    conversionsByDay = conversionsByDay.sort.map do |pair|
+      { "date" => pair[0], "conversions" => pair[1] }
     end
 
     user["impressionCount"] = impressionCount
     user["conversionCount"] = conversionCount
     user["revenue"] = revenue
+    user["conversionsByDay"] = conversionsByDay
   end
 
   File.open('users.json', 'w') { |file|

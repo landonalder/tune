@@ -1,10 +1,9 @@
-body {
-  background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  margin: 0;
-  padding: 30px;
+.userIdentification {
+  display: inline-block;
+}
+
+.occupation {
+  margin-left: 100px;
 }
 
 .profilePicture {
@@ -46,7 +45,6 @@ body {
 .stats {
   text-align: right;
   margin-right: 20px;
-  margin-top: 10px;
 }
 
 .impressions {
@@ -59,6 +57,26 @@ body {
 
 .revenue {
   color: green;
+}
+
+#left
+{
+  width: 200px;
+  float: left;
+}
+
+#right
+{
+  margin-left: 200px;
+}
+
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  margin: 0;
+  padding: 30px;
 }
 
 h1, h2, h3, h4 {
@@ -80,7 +98,6 @@ h2 {
 h3 {
   font-size: 1.3em;
   color: grey;
-  margin-left: 100px;
 }
 
 h4 {
