@@ -1,0 +1,60 @@
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  margin: 0;
+  padding: 30px;
+}
+
+.profilePicture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-position: center center;
+  background-size: cover;
+}
+
+.cardBackground {
+  background-color: white;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 15px;
+  border-style: solid;
+  width: 330px;
+  height: 200px;
+}
+
+.cardContainer {
+  padding: 5px;
+}
+
+.floatLeft {
+  float: left;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  margin: 0 0 5px;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2em;
+  padding-top: 15px;
+  margin-left: 85px;
+}
+
+h2 {
+  font-size: 1.3em;
+  color: grey;
+  margin-left: 90px;
+}
+
+p, ul {
+  margin: 15px 0;
+}
+
+ul {
+  padding-left: 30px;
+}

@@ -2,13 +2,9 @@
   "name": "tune",
   "version": "1.0.0",
   "description": "Coding challenge for the tune has offers team",
-  "main": "src/server/index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "jest",
-    "start": "node src/server/index.js",
-    "postinstall": "webpack --config config/webpack.js",
-    "webpack": "webpack --config config/webpack.js",
-    "webpack-watch": "webpack --config config/webpack.js --watch --colors"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,25 +13,9 @@
   "author": "Landon Alder",
   "license": "MIT",
   "dependencies": {
-    "debug": "^2.1.3",
-    "express": "^4.12.3",
-    "react": "^0.13.1"
+    "express": "^4.14.0",
+    "body-parser": "^1.4.3"
   },
   "devDependencies": {
-    "babel": "^5.0.12",
-    "babel-core": "^5.0.12",
-    "babel-loader": "^5.0.0",
-    "jest-cli": "^0.4.0",
-    "webpack": "^1.8.4"
-  },
-  "jest": {
-    "scriptPreprocessor": "./tools/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "react"
-    ],
-    "testPathDirs": [
-      "./src/app",
-      "./src/client"
-    ]
   }
 }
