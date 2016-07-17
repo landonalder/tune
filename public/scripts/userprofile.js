@@ -24,12 +24,13 @@ var UserStatsBox = React.createClass({
         <div className="cardContainer">
           <UserIdentification avatar={ this.state.userInfo.avatar } name={ this.state.userInfo["name"]}
                               occupation={ this.state.userInfo.occupation } />
+          <Statistic statNumber={ this.state.userInfo.impressionCount } statName="impressions" />
+          <Statistic statNumber={ this.state.userInfo.conversionCount } statName="conversions" />
         </div>
       </div>
     );
   }
 });
-
 
 var UserIdentification = React.createClass({
   render: function() {
@@ -65,18 +66,26 @@ var UserPhoto = React.createClass({
   render: function() {
     if (this.state.loadProfilePhoto) {
       return (
-        <img className="profilePicture floatLeft" src={ this.props.photoUrl }/>
-      )
+        <img className="profilePicture" src={ this.props.photoUrl }/>
+      );
     } else {
       return (
-        <div className="profilePicture floatLeft">Failed!</div>
-      )
+        <div className="profilePicture">Failed!</div>
+      );
     }
   }
 })
 
-
-
+var Statistic = React.createClass({
+  render: function() {
+      return (
+        <div className="stats">
+          <h3>{ this.props.statNumber }</h3>
+          <h4>{ this.props.statName }</h4>
+        </div>
+      );
+  }
+});
 
 ReactDOM.render(
   // <CommentBox url="/api/comments" pollInterval={2000} />,

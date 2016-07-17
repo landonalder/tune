@@ -13,6 +13,7 @@ body {
   border-radius: 50%;
   background-position: center center;
   background-size: cover;
+  float: left;
 }
 
 .cardBackground {
@@ -29,8 +30,9 @@ body {
   padding: 5px;
 }
 
-.floatLeft {
-  float: left;
+.stats {
+  text-align: right;
+  margin-right: 25px;
 }
 
 h1, h2, h3, h4 {
@@ -49,6 +51,14 @@ h2 {
   font-size: 1.3em;
   color: grey;
   margin-left: 90px;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1em;
 }
 
 p, ul {
