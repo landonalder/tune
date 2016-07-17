@@ -1,7 +1,12 @@
 require 'json'
 require 'Date'
 
-def mergeFiles(usersFilePath, activityLogPath)
+# Takes in the path of the originalUsers.json file and the log.json (which were provided in the challenge)
+# and merges the data for each user from the logs so that you can simply query based on user id to find
+# their total impressions, conversions, and conversions per day instead of having to correllate between
+# two different json files.
+# Output: writes a file to the current directory called users.json with the merged data in JSON format
+def mergeData(usersFilePath, activityLogPath)
   usersFile = File.read(usersFilePath)
   activityLog = File.read(activityLogPath)
 
@@ -22,7 +27,7 @@ def mergeFiles(usersFilePath, activityLogPath)
       if activity["type"] == "conversion"
         conversionCount += 1
         revenue += Integer(activity["revenue"])
-        date = DateTime.parse(activity["time"]).strftime('%m/%d')
+        date = DateTime.parse(activity["time"]).strftime('%-m/%-d')
 
 
         if !conversionsByDay[date]
