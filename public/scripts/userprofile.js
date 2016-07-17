@@ -50,28 +50,41 @@ var UserStatsBox = React.createClass({
           <UserIdentification avatar={ this.props.user.avatar } name={ this.props.user["name"] }
                               occupation={ this.props.user.occupation } />
           <ConversionsChart conversionsByDay={ this.props.user.conversionsByDay } />
-          <div id="right">
+          <div className="stats">
             <NamedStatistic statNumber={ this.props.user.impressionCount } statName="impressions" statType="impressions" />
             <NamedStatistic statNumber={ this.props.user.conversionCount } statName="conversions" statType="conversions" />
           </div>
-          <h2 className="stats revenue">{ formatNumberStringAsCurrency(this.props.user.revenue || "") }</h2>
+          <h2 className="statsText revenue">{ formatNumberStringAsCurrency(this.props.user.revenue || "") }</h2>
         </div>
       </div>
     );
   }
 });
 
+function firstDayOfConversionData(conversionsByDay) {
+  return conversionsByDay[0]["date"]
+}
+
+function lastDayOfConversionData(conversionsByDay) {
+  return conversionsByDay[conversionsByDay.length - 1]["date"]
+}
+
 var ConversionsChart = React.createClass({
   render: function() {
+    var conversionsByDay = this.props.conversionsByDay
     return (
-      <div id="left">
+      <div className="chart">
           <VictoryLine
-            data={ this.props.conversionsByDay }
+            data={ conversionsByDay }
             x={ "date" }
             y={ "conversions" }
-            height={ 80 }
-            width= { 300 }
+            height={ 60 }
+            width={ 170 }
+            padding={ 0 }
           />
+          <h4 className="conversionsDateRange">
+            { `Conversions ${firstDayOfConversionData(conversionsByDay)} - ${lastDayOfConversionData(conversionsByDay)}`}
+          </h4>
       </div>
     );
   }
@@ -142,9 +155,9 @@ var PhotoPlaceholder = React.createClass({
 var NamedStatistic = React.createClass({
   render: function() {
       return (
-        <div className="stats">
-          <h3 className={ this.props.statType }>{ this.props.statNumber }</h3>
-          <h4>{ this.props.statName }</h4>
+        <div className="statsText">
+          <h3 className={ `${this.props.statType}Number` }>{ this.props.statNumber }</h3>
+          <h4 className="impressionsAndConversionsLabels">{ this.props.statName }</h4>
         </div>
       );
   }

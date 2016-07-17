@@ -1,19 +1,19 @@
 .userIdentification {
   display: inline-block;
+  padding-top: 5px;
+  padding-left: 10px;
 }
 
 .occupation {
   margin-left: 100px;
+  color: #95A5A6;
 }
 
 .profilePicture {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-top: 5px;
-  margin-left: 5px;
   background-position: center center;
-  background-size: cover;
   float: left;
 }
 
@@ -43,35 +43,49 @@
 }
 
 .stats {
+  margin-left: 200px;
+}
+
+.statsText {
   text-align: right;
   margin-right: 20px;
 }
 
-.impressions {
-  color: orange;
+.impressionsNumber, .conversionsNumber {
+  margin: 0px;
 }
 
-.conversions {
-  color: blue;
+.impressionsNumber {
+  color: #e47e30;
+}
+
+.conversionsNumber {
+  color: #2f81b7;
+}
+
+.impressionsAndConversionsLabels {
+  color: lightGray;
 }
 
 .revenue {
-  color: green;
+  color: #30ad63;
 }
 
-#left
-{
-  width: 200px;
+.chart {
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 170px;
+  height: 60px;
   float: left;
 }
 
-#right
-{
-  margin-left: 200px;
+.conversionsDateRange {
+  text-align: center;
+  padding-top: 5px;
 }
 
 body {
-  background: #fff;
+  background: #7f8c8d;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 1;
@@ -87,6 +101,7 @@ h1, h2, h3, h4 {
 
 h1 {
   font-size: 1.8em;
+  color: #2d3e4f;
   padding-top: 15px;
   margin-left: 90px;
 }
@@ -101,7 +116,8 @@ h3 {
 }
 
 h4 {
-  font-size: 1em;
+  font-size: 1.1em;
+  font-weight: normal;
 }
 
 p, ul {
