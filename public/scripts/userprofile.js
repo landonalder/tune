@@ -1,11 +1,18 @@
-var UserStatsBox = React.createClass({
-  loadUserInfo: function() {
+// Idea for this taken from this stackoverflow post:
+// http://stackoverflow.com/questions/14467433/currency-formatting-in-javascript
+function formatNumberStringAsCurrency(numberString) {
+  var numberWithCommas =numberString.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+  return `$${numberWithCommas}`
+};
+
+var AllUserStats = React.createClass({
+  loadUsers: function() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       cache: false,
-      success: function(info) {
-        this.setState({userInfo: info});
+      success: function(users) {
+        this.setState({users: users});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -13,19 +20,36 @@ var UserStatsBox = React.createClass({
     });
   },
   getInitialState: function() {
-    return {userInfo: {}};
+    return {users: []};
   },
   componentDidMount: function() {
-    this.loadUserInfo();
+    this.loadUsers();
   },
+  render: function() {
+    if(this.state.users.length == 0) {
+      return <div>No users!</div>
+    }
+
+      return (
+        <div>
+          { this.state.users.map(function(user) {
+            return <UserStatsBox user={ user }/>
+          })}
+        </div>
+      );
+  }
+});
+
+var UserStatsBox = React.createClass({
   render: function() {
     return (
       <div className="cardBackground">
         <div className="cardContainer">
-          <UserIdentification avatar={ this.state.userInfo.avatar } name={ this.state.userInfo["name"]}
-                              occupation={ this.state.userInfo.occupation } />
-          <Statistic statNumber={ this.state.userInfo.impressionCount } statName="impressions" />
-          <Statistic statNumber={ this.state.userInfo.conversionCount } statName="conversions" />
+          <UserIdentification avatar={ this.props.user.avatar } name={ this.props.user["name"] }
+                              occupation={ this.props.user.occupation } />
+          <NamedStatistic statNumber={ this.props.user.impressionCount } statName="impressions" statType="impressions" />
+          <NamedStatistic statNumber={ this.props.user.conversionCount } statName="conversions" statType="conversions" />
+          <h2 className="stats revenue">{ formatNumberStringAsCurrency(this.props.user.revenue || "") }</h2>
         </div>
       </div>
     );
@@ -38,7 +62,7 @@ var UserIdentification = React.createClass({
       <div>
         <UserPhoto photoUrl={ this.props.avatar }/>
         <h1>{ this.props["name"] }</h1>
-        <h2>{ this.props.occupation }</h2>
+        <h3>{ this.props.occupation }</h3>
       </div>
     );
   }
@@ -76,11 +100,11 @@ var UserPhoto = React.createClass({
   }
 })
 
-var Statistic = React.createClass({
+var NamedStatistic = React.createClass({
   render: function() {
       return (
         <div className="stats">
-          <h3>{ this.props.statNumber }</h3>
+          <h3 className={ this.props.statType }>{ this.props.statNumber }</h3>
           <h4>{ this.props.statName }</h4>
         </div>
       );
@@ -88,7 +112,7 @@ var Statistic = React.createClass({
 });
 
 ReactDOM.render(
-  // <CommentBox url="/api/comments" pollInterval={2000} />,
-  <UserStatsBox url="/users/75"/>,
+  <AllUserStats url="/users" />,
+  // <UserStatsBox url="/users/75"/>,
   document.getElementById('content')
 );

@@ -29,6 +29,17 @@ app.get('/activityLog', function(req, res) {
   });
 });
 
+app.get('/users', function(req, res) {
+  fs.readFile(USERS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      res.json({ "error": "user not found" });
+      return
+    }
+    res.json(JSON.parse(data))
+  });
+});
+
 app.get('/users/:userId', function(req, res) {
   fs.readFile(USERS_FILE, function(err, data) {
     if (err) {

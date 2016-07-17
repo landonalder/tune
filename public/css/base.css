@@ -11,6 +11,8 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
   background-position: center center;
   background-size: cover;
   float: left;
@@ -24,6 +26,7 @@ body {
   border-style: solid;
   width: 330px;
   height: 200px;
+  display: inline-block;
 }
 
 .cardContainer {
@@ -32,7 +35,20 @@ body {
 
 .stats {
   text-align: right;
-  margin-right: 25px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.impressions {
+  color: orange;
+}
+
+.conversions {
+  color: blue;
+}
+
+.revenue {
+  color: green;
 }
 
 h1, h2, h3, h4 {
@@ -42,19 +58,19 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.8em;
   padding-top: 15px;
-  margin-left: 85px;
-}
-
-h2 {
-  font-size: 1.3em;
-  color: grey;
   margin-left: 90px;
 }
 
+h2 {
+  font-size: 1.6em;
+}
+
 h3 {
-  font-size: 1.2em;
+  font-size: 1.3em;
+  color: grey;
+  margin-left: 100px;
 }
 
 h4 {
