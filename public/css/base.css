@@ -18,6 +18,14 @@ body {
   float: left;
 }
 
+.profilePicturePlaceholderText {
+  line-height: 80px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 4em;
+  color: white;
+}
+
 .cardBackground {
   background-color: white;
   border-color: black;
@@ -27,6 +35,8 @@ body {
   width: 330px;
   height: 200px;
   display: inline-block;
+  vertical-align: top;
+  margin: 10px;
 }
 
 .cardContainer {

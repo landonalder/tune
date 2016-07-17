@@ -33,7 +33,7 @@ var AllUserStats = React.createClass({
       return (
         <div>
           { this.state.users.map(function(user) {
-            return <UserStatsBox user={ user }/>
+            return <UserStatsBox key={ user.id } user={ user }/>
           })}
         </div>
       );
@@ -60,7 +60,7 @@ var UserIdentification = React.createClass({
   render: function() {
     return (
       <div>
-        <UserPhoto photoUrl={ this.props.avatar }/>
+        <UserPhoto photoUrl={ this.props.avatar } userName={ this.props["name"] }/>
         <h1>{ this.props["name"] }</h1>
         <h3>{ this.props.occupation }</h3>
       </div>
@@ -85,20 +85,38 @@ var UserPhoto = React.createClass({
     return {loadProfilePhoto: false};
   },
   componentDidMount: function() {
-    this.loadProfilePhoto();
+    if (this.props.photoUrl != "") {
+      this.loadProfilePhoto();
+    }
   },
   render: function() {
     if (this.state.loadProfilePhoto) {
       return (
-        <img className="profilePicture" src={ this.props.photoUrl }/>
+        <img className="profilePicture" src={ this.props.photoUrl } />
       );
     } else {
       return (
-        <div className="profilePicture">Failed!</div>
+        <PhotoPlaceholder userName={ this.props.userName } />
       );
     }
   }
 })
+
+var PhotoPlaceholder = React.createClass({
+  render: function() {
+    var colorChoices = ["#9a5cb4", "#3a99d8", "#ff6600", "#009933"]
+    var randomColor = colorChoices[Math.floor(Math.random() * 4)];
+    var style = {
+      backgroundColor: randomColor
+    }
+
+    return (
+      <div className="profilePicture" style={ style }>
+        <div className="profilePicturePlaceholderText">{ this.props.userName.charAt(0) }</div>
+      </div>
+    );
+  }
+});
 
 var NamedStatistic = React.createClass({
   render: function() {
@@ -113,6 +131,5 @@ var NamedStatistic = React.createClass({
 
 ReactDOM.render(
   <AllUserStats url="/users" />,
-  // <UserStatsBox url="/users/75"/>,
   document.getElementById('content')
 );
